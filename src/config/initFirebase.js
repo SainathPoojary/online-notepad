@@ -9,9 +9,6 @@ const firebaseConfig = {
   messagingSenderId: process.env.REACT_APP_messagingSenderId,
   appId: process.env.REACT_APP_appId,
 };
-
-if (firebaseConfig.apiKey) console.log(process.env);
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 // Initialize Firestore
