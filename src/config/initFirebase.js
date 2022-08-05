@@ -11,6 +11,8 @@ const firebaseConfig = {
   appId: process.env.appId,
 };
 
+if (firebaseConfig.apiKey === undefined) console.log("apiKey is undefined");
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 // Initialize Firestore
