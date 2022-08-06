@@ -2,6 +2,8 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import { addText, getText } from "./util/FirebaseOperation";
 import { useParams } from "react-router-dom";
+import { onSnapshot, doc } from "firebase/firestore";
+import { db } from "./config/initFirebase";
 function App() {
   const [text, setText] = useState("");
   const { noteId } = useParams();
@@ -14,6 +16,15 @@ function App() {
         addText(noteId);
       }
     });
+
+    const unsubscribe = onSnapshot(doc(db, "notes", noteId), (snapshot) => {
+      setText(snapshot.data().text);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+
     // eslint-disable-next-line
   }, []);
 
