@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 function App() {
   const [text, setText] = useState("");
   const { noteId } = useParams();
+  const [skipCount, setSkipCount] = useState(true);
   useEffect(() => {
     getText(noteId).then((res) => {
       if (res != null) {
@@ -17,7 +18,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (text) addText(noteId, text);
+    if (skipCount) setSkipCount(false);
+    if (!skipCount) {
+      addText(noteId, text);
+    }
     // eslint-disable-next-line
   }, [text]);
 
